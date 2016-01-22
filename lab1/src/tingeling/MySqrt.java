@@ -26,11 +26,10 @@ public class MySqrt {
     }
 
     /**
-     * A wrapper method that call helpRecursive in order to calculate the
-     *
+     * A wrapper method that call helpRecursive in order to calculate the square root of x.
      * @param x       the number we are going to find a square of
-     * @param epsilon
-     * @return
+     * @param epsilon the margin of error
+     * @return returns the square root of x while x>=0. Returns Double NaN if x is negative.
      */
     public static double mySqrtRecurse(double x, double epsilon) {
         if (x > 1) {
@@ -41,6 +40,14 @@ public class MySqrt {
         return Double.NaN;
     }
 
+    /**
+     * The recursive method that calculates the square root of x.
+     * @param sqr the number we are going to find square of
+     * @param eps the margin of error
+     * @param low the lower
+     * @param high
+     * @return
+     */
     public static double helpRecursive(double sqr, double eps, double low, double high) {
         double midpoint = ((high + low) / 2);
         double lowmidpoint = midpoint - eps;

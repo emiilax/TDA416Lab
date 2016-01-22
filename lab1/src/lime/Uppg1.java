@@ -25,7 +25,7 @@ public class Uppg1 {
      * Calculates the square root with "eps" accuracy. This is a recursive method
      * which calls it self until the answer is within the sqr(+-) eps area.
      * @param sqr the number you want to know the square root of.
-     * @param eps the the margin of error.
+     * @param eps the margin of error.
      * @param low smaller than correct value
      * @param high bigger than correct answer
      * @return
@@ -50,6 +50,12 @@ public class Uppg1 {
 
     }
 
+    /**
+     * Calculates the square root with foor-loop. It calculates the square root with "eps" accuracy.
+     * @param x the number you want to find the square root of
+     * @param epsilon the margin of error
+     * @return it returns the square root of x while x>=0. If x is negative, it returns Double.NaN
+     */
 
     public static double mySqrtLoop(double x, double epsilon){
 
