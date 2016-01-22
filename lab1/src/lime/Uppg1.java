@@ -86,7 +86,8 @@ public class Uppg1 {
 
     public static void main(String [] args){
         System.out.println("--------------- Test 1 ------------");
-        System.out.println("Check values x < 0 :");
+        System.out.println("Check values x < 0, should return NaN");
+
         double sqrtR = mySqrtRecurse(-1, 10e-6);
 
 
