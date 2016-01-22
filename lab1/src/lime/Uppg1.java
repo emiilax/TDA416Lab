@@ -89,10 +89,12 @@ public class Uppg1 {
         System.out.println("Check values x < 0, should return NaN");
 
         double sqrtR = mySqrtRecurse(-1, 10e-6);
-        System.out.println("Using mySqrt");
-
-
         double sqrtL = mySqrtLoop(-1, 10e-6);
+        System.out.println("Using mySqrtRecursive (x = -1) = " +    sqrtR);
+        System.out.println("Using mySqrtLoop (x = -1) = " +         sqrtL);
+
+
+
         System.out.println("SqrtR: " + sqrtR);
         System.out.println("SqrtL: " + sqrtL);
 
