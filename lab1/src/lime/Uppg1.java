@@ -1,5 +1,7 @@
 package lime;
 
+import java.util.DoubleSummaryStatistics;
+
 /**
  * Created by emilaxelsson on 20/01/16.
  */
@@ -85,18 +87,144 @@ public class Uppg1 {
 
 
     public static void main(String [] args){
-        System.out.println("--------------- Test 1 ------------");
-        System.out.println("Check values x < 0, should return NaN");
+
+        // --------------------------- Test 1 -------------------------------------
+        System.out.println("--------------- Test 1 ---------------");
+        System.out.println("Check values x < 0, should print NaN:");
+        System.out.println();
+        System.out.println("Checks value x = -1");
+        System.out.println();
 
         double sqrtR = mySqrtRecurse(-1, 10e-6);
         double sqrtL = mySqrtLoop(-1, 10e-6);
-        System.out.println("Using mySqrtRecursive (x = -1) = " +    sqrtR);
-        System.out.println("Using mySqrtLoop (x = -1) = " +         sqrtL);
+
+        if(Double.compare(Double.NaN, sqrtR) == 0) {
+            System.out.println("Correct: Using mySqrtRecursive = " + sqrtR);
+        }else{
+            System.out.printf("Fail: mySqrtRecursive function failed");
+        }
+
+        if(Double.compare(Double.NaN, sqrtL) == 0){
+            System.out.println("Correct: Using mySqrtLoop = " + sqrtL);
+        } else{
+            System.out.printf("Fail: mySqrtLoop function failed");
+        }
+
+        System.out.println();
+        System.out.println();
 
 
 
-        System.out.println("SqrtR: " + sqrtR);
-        System.out.println("SqrtL: " + sqrtL);
+        // --------------------------- Test 2 -------------------------------------
+        System.out.println("--------------- Test 2 ---------------");
+        System.out.println("Check values 0 =< x =< 1:");
+        System.out.println();
+        System.out.println("Checks value x = 0.5, value should be " + Math.sqrt(0.5) + " (+-) 10e-6 " );
+        System.out.println();
+        sqrtR = mySqrtRecurse(0.5, 10e-6);
+        sqrtL = mySqrtLoop(0.5, 10e-6);
+
+        if(sqrtR < Math.sqrt(0.5) + 10e-6 && sqrtR > Math.sqrt(0.5) - 10e-6){
+            System.out.println("Correct: Using mySqrtRecursive = " + sqrtR);
+        } else{
+            System.out.printf("Fail: mySqrtRecursive function failed");
+        }
+
+        if(sqrtL < Math.sqrt(0.5) + 10e-6 && sqrtL > Math.sqrt(0.5) - 10e-6){
+            System.out.println("Correct: Using mySqrtLoop = " + sqrtL);
+        }else{
+            System.out.printf("Fail: mySqrtLoop function failed");
+        }
+        System.out.println();
+        System.out.println();
+
+        // --------------------------- Test 3 -------------------------------------
+        System.out.println("--------------- Test 3 ---------------");
+        System.out.println("Check the limited values x = 0 and x = 1 :");
+        System.out.println();
+        System.out.println("Checks value x = 0, value should be 0"  );
+        System.out.println();
+        sqrtR = mySqrtRecurse(0, 10e-6);
+        sqrtL = mySqrtLoop(0, 10e-6);
+
+        if(sqrtR < 10e-6 && sqrtR > (-10e-6) ){
+            System.out.println("Correct: Using mySqrtRecursive (x = 0) = " + sqrtR);
+        } else{
+            System.out.println("Fail: mySqrtRecursive function failed");
+        }
+
+        if(sqrtL < 10e-6 && sqrtL > (-10e-6) ){
+            System.out.println("Correct: Using mySqrtLoop (x = 0) = " + sqrtL);
+        }else{
+            System.out.println("Fail: mySqrtLoop function failed");
+        }
+
+        System.out.println();
+        System.out.println("Checks value x = 1, value should be 1"  );
+        System.out.println();
+        sqrtR = mySqrtRecurse(1, 10e-6);
+        sqrtL = mySqrtLoop(1, 10e-6);
+
+        if(sqrtR < 1 + 10e-6 && sqrtR > 1 - 10e-6){
+            System.out.println("Correct: Using mySqrtRecursive (x = 0) = " + sqrtR);
+        } else{
+            System.out.printf("Fail: mySqrtRecursive function failed");
+        }
+
+        if(sqrtL < 1 + 10e-6 && sqrtL > 1 - 10e-6){
+            System.out.println("Correct: Using mySqrtLoop (x = 0) = " + sqrtL);
+        }else{
+            System.out.printf("Fail: mySqrtLoop function failed");
+        }
+        System.out.println();
+        System.out.println();
+
+        // --------------------------- Test 4 -------------------------------------
+        System.out.println("--------------- Test 4 ---------------");
+        System.out.println("Check values x>1 and not a even number:");
+        System.out.println();
+        System.out.println("Checks value x = 3.78, value should be " + Math.sqrt(3.78) + " (+-) 10e-6 " );
+        System.out.println();
+        sqrtR = mySqrtRecurse(3.78, 10e-6);
+        sqrtL = mySqrtLoop(3.78, 10e-6);
+
+        if(sqrtR < Math.sqrt(3.78) + 10e-6 && sqrtR > Math.sqrt(3.78) - 10e-6){
+            System.out.println("Correct: Using mySqrtRecursive (= " + sqrtR);
+        } else{
+            System.out.printf("Fail: mySqrtRecursive function failed");
+        }
+
+        if(sqrtL < Math.sqrt(3.78) + 10e-6 && sqrtL > Math.sqrt(3.78) - 10e-6){
+            System.out.println("Correct: Using mySqrtLoop = " + sqrtL);
+        }else{
+            System.out.printf("Fail: mySqrtLoop function failed");
+        }
+        System.out.println();
+        System.out.println();
+
+        // --------------------------- Test 5 -------------------------------------
+        System.out.println("--------------- Test 5 ---------------");
+        System.out.println("Check values x>1 and a big number :");
+        System.out.println();
+        System.out.println("Checks value x = 123456789, value should be " + Math.sqrt(123456789) + " (+-) 10e-6 " );
+
+        sqrtR = mySqrtRecurse(123456789, 10e-6);
+        sqrtL = mySqrtLoop(123456789, 10e-6);
+
+        if(sqrtR < Math.sqrt(123456789) + 10e-6 && sqrtR > Math.sqrt(123456789) - 10e-6){
+            System.out.println("Correct: Using mySqrtRecursive = " + sqrtR);
+        } else{
+            System.out.printf("Fail: mySqrtRecursive function failed");
+        }
+
+        if(sqrtL < Math.sqrt(123456789) + 10e-6 && sqrtL > Math.sqrt(123456789) - 10e-6){
+            System.out.println("Correct: Using mySqrtLoop = " + sqrtL);
+        }else{
+            System.out.printf("Fail: mySqrtLoop function failed");
+        }
+        System.out.println();
+
+
 
     }
 }
