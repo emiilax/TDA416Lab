@@ -2,7 +2,7 @@
 public class MySqrt {
 
     /**
-     * Calculates the square root with foor-loop and estimates the answer with epsilon accuracy.
+     * Calculates the square root with while-loop and estimates the answer with epsilon accuracy.
      * @param x the number you want to find the square root of
      * @param epsilon the margin of error
      * @return it returns the square root of x while x>=0. If x is negative, it returns Double.NaN
@@ -13,10 +13,10 @@ public class MySqrt {
         double max;
         double min;
 
-        if(x <= 1 && x > 0) {
+        if(x <= 1 && x > 0) { // between 0 and one
             max = 1;
             min = x;
-        } else if(x < 0){
+        } else if(x < 0){ // smaller than zero, return NaN
             return Double.NaN;
         } else if(x==0) {
             return 0;
@@ -27,12 +27,13 @@ public class MySqrt {
 
         double midValue = ((max+min)/2);
         double midValueSquared = Math.pow(midValue , 2);
-
+        
+        // loops until midvalueSquared is in between x + eps, x -eps
         while (midValueSquared > x + epsilon || midValueSquared < x - epsilon){
 
-            if(midValueSquared > x + epsilon){
+            if(midValueSquared > x + epsilon){ // midvalueSquared bigger? new max
                 max = midValue;
-            }else if(midValueSquared < x - epsilon){
+            }else if(midValueSquared < x - epsilon) { // midvalueSquared lower? new min
                 min = midValue;
             }
             midValue = ((max+min)/2);
@@ -62,29 +63,25 @@ public class MySqrt {
     /**
      * The recursive method that calculates the square root of x.
      * @param x the number we are going to find square of
-     * @param eps the margin of error
+     * @param epsilon the margin of error
      * @param min the minimum number of the interval
      * @param max the maximum number of the interval
      * @return returns the square root of sqr
      */
-    public static double helpRecursive(double x, double eps, double min, double max) {
+    public static double helpRecursive(double x, double epsilon, double min, double max) {
         double midpoint = ((max + min) / 2);
-        double lowmidpoint = midpoint - eps;
-        double highmidpoint = midpoint + eps;
         double sqrmidpoint = midpoint * midpoint;
 
-        //Returns midpoint if midpoint lies in the interval around x with "eps" accuracy
-        if (highmidpoint * highmidpoint>=x && x >= lowmidpoint * lowmidpoint) {
-            return midpoint;
+        if (sqrmidpoint > (x + epsilon)) {
+            //Call this method again with midpont as the maximum number of the interval
+            return helpRecursive(x, epsilon, min, midpoint);
+        } else if(sqrmidpoint < (x -epsilon)){
+            //Call this method again with midpont as the minimum number of the interval
+            return helpRecursive(x, epsilon, midpoint, max);
         }
 
-        if (sqrmidpoint > (x + eps)) {
-            //Call this method again with midpont as the maximum number of the interval
-            return helpRecursive(x, eps, min, midpoint);
-        } else {
-            //Call this method again with midpont as the minimum number of the interval
-            return helpRecursive(x, eps, midpoint, max);
-            }
+        //Returns midpoint if midpoint lies in the interval around x with "epsilon" accuracy
+        return midpoint;
 
     }
 
@@ -114,7 +111,6 @@ public class MySqrt {
 
         System.out.println();
         System.out.println();
-
 
 
         // --------------------------- Test 2 -------------------------------------
