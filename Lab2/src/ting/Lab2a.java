@@ -9,7 +9,7 @@ public class Lab2a {
         while ((copy.length / 2) > k) {
             double[] lessValue = {0, 0};
 
-            for (int i = 2; i < copy.length - 2; i++) {
+            for (int i = 2; i < copy.length - 2; i=i+2) {
                 double[] L = {copy[i - 2], copy[i - 1]};
                 double[] P = {copy[i], copy[i + 1]};
                 double[] R = {copy[i + 2], copy[i + 3]};
@@ -26,7 +26,7 @@ public class Lab2a {
                 }
 
         }
-            removeElement(copy,lessValue[1]);
+            copy=removeElement(copy,lessValue[1]);
     }
 
     return copy;
