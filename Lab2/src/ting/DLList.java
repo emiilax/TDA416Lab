@@ -24,10 +24,13 @@ public class DLList<E> {
 
         public Node getNext() {
             // TODO
+
+            return null;
         }
 
         public Node getPrev() {
             // TODO
+            return null;
         }
     }
 
@@ -48,6 +51,7 @@ public class DLList<E> {
      */
     public Node addFirst(E e) {
         // TODO
+        return null;
     }
 
     /**
@@ -58,6 +62,7 @@ public class DLList<E> {
      */
     public Node addLast(E e) {
         // TODO
+        return null;
     }
 
     /**
@@ -65,6 +70,7 @@ public class DLList<E> {
      */
     public Node getFirst() {
         // TODO
+        return null;
     }
 
     /**
@@ -72,6 +78,7 @@ public class DLList<E> {
      */
     public Node getLast() {
         // TODO
+        return null;
     }
 
     /**
@@ -83,6 +90,7 @@ public class DLList<E> {
      */
     public Node insertAfter(E e, Node l) {
         // TODO
+        return null;
     }
 
     /**
@@ -94,6 +102,7 @@ public class DLList<E> {
      */
     public Node insertBefore(E e, Node l) {
         // TODO
+        return null;
     }
 
     /**
