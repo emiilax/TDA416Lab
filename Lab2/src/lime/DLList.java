@@ -43,9 +43,13 @@ public class DLList<E> {
 
     Node node = new Node(e);
     node.prev = null;
-    node.next = first;
 
-    first.prev = node;
+    if(first == null){
+      node.next = last;
+    }else{
+      node.next = first;
+    }
+
     first = node;
 
     return node;
@@ -59,9 +63,13 @@ public class DLList<E> {
 
     Node node = new Node(e);
     node.next = null;
-    node.prev = last;
 
-    last.next = node;
+    if(last == null) {
+      node.prev = first;
+    } else{
+      node.prev = last;
+    }
+
     last = node;
 
     return node;
@@ -120,12 +128,14 @@ public class DLList<E> {
     */
   public void remove(Node l) {
 
-    l.prev.next = l.next;
     l.next.prev = l.prev;
+    l.prev.next = l.next;
 
-    if((l.prev == null))  first = l.next;
 
-    if((l.next == null))  last = l.prev;
+
+    if((l.prev == null))first = l.next;;
+
+    if((l.next == null)) last = l.prev;;
 
   }
 

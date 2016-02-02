@@ -11,7 +11,7 @@ public class Lab2a {
 
     double [] copy = poly;
 
-    double lowestValue = -1;
+    double lowestValue = 0;
     int lowValPosition = 0;
     double currentValue;
 

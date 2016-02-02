@@ -1,6 +1,7 @@
 package lime;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import lime.DLList.Node;
 
@@ -18,6 +19,7 @@ public class Lab2b {
     double [] pointstart = {poly[0], poly[1]};
     double [] pointstop = {poly[poly.length-2], poly[poly.length-1]};
 
+
     list.addFirst(pointstart);
     list.addLast(pointstop);
     priorityQueue.add(list.first);
@@ -31,23 +33,25 @@ public class Lab2b {
 
       node = list.insertAfter(point, node);
       priorityQueue.add(node);
+
     }
 
-    while((lenght / 2)> k){
+    while((lenght / 2) > k){
 
       list.remove(priorityQueue.element().getNext());
       priorityQueue.remove(priorityQueue.element().getNext());
 
+      lenght = lenght-2;
 
     }
 
     return null;
-      // TODO
   }
 
-  private void removeElement(){
+  private void removeElement(Node node){
 
-
+    node.getNext().prev = node.getPrev();
+    node.getPrev().next = node.next;
 
   }
 }
