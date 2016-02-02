@@ -20,12 +20,10 @@ public class DLList<E> {
     }
 
     public Node getNext() {
-      // TODO
       return this.next;
     }
 
     public Node getPrev() {
-      // TODO
       return this.prev;
     }
   }
@@ -122,10 +120,8 @@ public class DLList<E> {
     */
   public void remove(Node l) {
 
-
     l.prev.next = l.next;
     l.next.prev = l.prev;
-
 
     if((l.prev == null))  first = l.next;
 
