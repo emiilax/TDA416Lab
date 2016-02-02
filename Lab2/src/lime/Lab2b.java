@@ -10,9 +10,10 @@ public class Lab2b {
   public static double[] simplifyShape(double[] poly, int k) {
 
     DLList<double[]> list= new DLList<>();
-
     Comparator<DLList.Node> comparator = new ElementComparator();
     PriorityQueue<DLList.Node> priorityQueue = new PriorityQueue<>(poly.length/2, comparator);
+
+    int lenght = poly.length;
 
     double [] pointstart = {poly[0], poly[1]};
     double [] pointstop = {poly[poly.length-2], poly[poly.length-1]};
@@ -32,8 +33,21 @@ public class Lab2b {
       priorityQueue.add(node);
     }
 
-    
+    while((lenght / 2)> k){
+
+      list.remove(priorityQueue.element().getNext());
+      priorityQueue.remove(priorityQueue.element().getNext());
+
+
+    }
+
     return null;
       // TODO
+  }
+
+  private void removeElement(){
+
+
+
   }
 }
