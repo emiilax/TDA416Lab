@@ -24,7 +24,7 @@ public class Lab2 {
 
 
 
-        File f = new File(Lab2.class.getResource("fig1.txt").getFile());
+        File f = new File(Lab2.class.getResource("fig2.txt").getFile());
 
         Scanner sc = null;
         try {

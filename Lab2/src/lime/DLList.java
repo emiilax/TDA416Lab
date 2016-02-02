@@ -42,8 +42,15 @@ public class DLList<E> {
    * @return    the node holding the added element
    */
   public Node addFirst(E e) {
-      return null;
-      // TODO
+
+    Node node = new Node(e);
+    node.prev = null;
+    node.next = first;
+
+    first.prev = node;
+    first = node;
+
+    return node;
   }
 
   /** inserts an element at then end of the list
@@ -51,24 +58,29 @@ public class DLList<E> {
    * @return    the node holding the added element
    */
   public Node addLast(E e) {
-    return null;
-      // TODO
+
+    Node node = new Node(e);
+    node.next = null;
+    node.prev = last;
+
+    last.next = node;
+    last = node;
+
+    return node;
   }
   
   /**
    * @return    the node of the list's first element, null if list is empty
    */
   public Node getFirst() {
-    return null;
-      // TODO
+    return first;
   }
   
   /**
    * @return    the node of the list's last element, null if list is empty
    */
   public Node getLast() {
-      // TODO
-    return null;
+    return last;
   }
   
   /** inserts a new element after a specified node
@@ -77,8 +89,15 @@ public class DLList<E> {
     * @return    the node holding the inserted element
     */
   public Node insertAfter(E e, Node l) {
-      // TODO
-    return null;
+
+    Node node = new Node(e);
+    node.prev = l;
+    node.next = l.next;
+
+    l.next = node;
+    if(node.next == null) last = node;
+
+    return node;
   }
 
   /** inserts a new element before a specified node
@@ -87,15 +106,31 @@ public class DLList<E> {
     * @return    the node holding the inserted element
     */
   public Node insertBefore(E e, Node l) {
-      // TODO
-    return null;
+
+    Node node = new Node(e);
+    node.next = l;
+    node.prev = l.prev;
+
+    l.prev = node;
+    if(node.prev == null) first = node;
+
+    return node;
   }
 
   /** removes an element
     * @param l   then node containing the element that will be removed, must be non-null and a node belonging to this list
     */
   public void remove(Node l) {
-      // TODO
+
+
+    l.prev.next = l.next;
+    l.next.prev = l.prev;
+
+
+    if((l.prev == null))  first = l.next;
+
+    if((l.next == null))  last = l.prev;
+
   }
 
 }

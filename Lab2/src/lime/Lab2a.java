@@ -22,7 +22,7 @@ public class Lab2a {
     double l3 = 0;
 
     while(copy.length/2 > k && copy.length > 4){
-
+      lowestValue = -1;
       for(int i = 0; i < copy.length; i = i + 2){
 
         if((i+5) > copy.length ) break;
@@ -60,12 +60,19 @@ public class Lab2a {
   private static double [] removePoint(double [] array, int position){
 
     double [] newArray = new double[array.length - 2];
+    System.out.println("position: " + position);
+    System.out.println("new array: " + newArray.length);
+    System.out.println("old array" + array.length);
 
     int pos = 0;
 
     for(int i = 0; i < array.length; i++){
-      if(i != position && i != (position + 1)){
+
+
+      if(!(i == position || i == (position + 1))){
+        System.out.println("i : " + i);
         newArray[pos] = array[i];
+        System.out.println("pos : " + pos);
         pos++;
       }
     }
@@ -81,6 +88,8 @@ public class Lab2a {
     for(int i = 0; i <poly.length; i++){
 
       System.out.println("Poly: " + poly[i]);
+
+
 
     }
     System.out.println();
