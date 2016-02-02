@@ -1,7 +1,7 @@
 package ting;
 
-import lime.*;
-import lime.DLList;
+import ting.*;
+import ting.DLList;
 
 import java.util.Comparator;
 
