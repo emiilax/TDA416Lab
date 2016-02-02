@@ -10,12 +10,15 @@ public class Lab2a {
      * @return the new array with fewer elements
      */
     public static double[] simplifyShape(double[] poly, int k) {
+
+        if(poly.length<=4 || k<2) return poly;
+
         double[] copy = poly;
 
         //array that keeps information about the point with less value
         double[] valueInfo = {0.00, 0.00};
 
-        while (((copy.length) / 2) > k) {
+        while (((copy.length) / 2) > k ) {
 
             //start the loop in the second point and end in the penultimate point
             for (int i = 2; i < copy.length - 3; i = i + 2) {
