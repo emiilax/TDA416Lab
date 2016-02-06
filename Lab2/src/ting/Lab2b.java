@@ -1,5 +1,6 @@
 package ting;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -9,41 +10,50 @@ import ting.DLList.Node;
 public class Lab2b {
 
     public static double[] simplifyShape(double[] poly, int k) {
-
         DLList<double[]> list = new DLList<>();
-
         Comparator<DLList.Node> comparator = new ElementComparator();
         PriorityQueue<DLList.Node> priorityQueue = new PriorityQueue<>(poly.length / 2, comparator);
 
-        double[] pointstart = {poly[0], poly[1]};
-        double[] pointstop = {poly[poly.length - 2], poly[poly.length - 1]};
+        double[] pointFirst = {poly[0], poly[1]};
+        double[] pointSecond = {poly[2], poly[3]};
 
-        list.addFirst(pointstart);
-        list.addLast(pointstop);
-        priorityQueue.add(list.first);
-        priorityQueue.add(list.last);
+        list.addFirst(pointFirst);
+        Node node = list.insertAfter(pointSecond, list.getFirst());
 
-        Node node = list.first;
-
-        for (int i = 2; i < poly.length - 2; i = i + 2) {
-
+        Node currentNode;
+        for (int i = 4; i < poly.length; i = i + 2) {
             double[] point = {poly[i], poly[i + 1]};
-
-            node = list.insertAfter(point, node);
+            currentNode = list.insertAfter(point, node);
             priorityQueue.add(node);
+            node = currentNode;
+        }
+
+        while (priorityQueue.size()+2 > k) {
+            Node head = priorityQueue.remove(); //O(logn) faster
+            list.remove(head);
+            if (head.getPrev().getPrev() != null) {
+                priorityQueue.remove(head.getPrev());
+                priorityQueue.add(head.getPrev());
+            }
+            if (head.getNext().getNext() != null) {
+                priorityQueue.remove(head.getNext());
+                priorityQueue.add(head.getNext());
+            }
+        }
+
+        DLList<double[]>.Node curr = list.getFirst();
+
+        double[] polyArray = new double[k*2];
+        int i = 0;
+        while (curr != null) {
+            polyArray[i] = curr.elt[0];
+            polyArray[i + 1] = curr.elt[1];
+            i = i + 2;
+            curr = curr.getNext();
+
         }
 
 
-        return null;
-        // TODO
-    }
-
-    public static void removeElement(Node node) {
-        node.getNext().prev = node.getPrev();
-        node.getPrev().next = node.next;
-    }
-
-    public static void main(String[] main) {
-
+        return polyArray;
     }
 }

@@ -13,19 +13,13 @@ public class ElementComparator implements Comparator<DLList.Node> {
     @Override
     public int compare(DLList.Node o1, DLList.Node o2) {
 
-        if(o1.getPrev()== null || o2.getNext()== null){
-            return -1;
-        }else if(o1.getNext() == null || o2.getPrev()==null){
-            return 1;
-        }
-
         double o1Value;
         double o2Value;
 
         o1Value = calculateValue(o1);
         o2Value = calculateValue(o2);
 
-        if(o2Value<o1Value){
+        if(o2Value>o1Value){
             return -1;
         } else if(o2Value==o1Value){
             return 0;
