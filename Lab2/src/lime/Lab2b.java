@@ -45,7 +45,7 @@ public class Lab2b {
 
     }
 
-    return null;
+    return null ;
   }
 
   private void removeElement(Node node){
