@@ -16,9 +16,6 @@ public class ElementComparator implements Comparator<DLList.Node> {
     @Override
     public int compare(DLList.Node o1, DLList.Node o2) {
 
-        if(o1.getPrev() == null || o2.getNext() == null) return -1;
-        if(o1.getNext() == null || o2.getPrev() == null) return 1;
-
         L = (double []) o1.getPrev().elt;
         P = (double []) o1.elt;
         R = (double []) o1.getNext().elt;

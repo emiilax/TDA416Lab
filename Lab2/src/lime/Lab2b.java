@@ -1,7 +1,6 @@
 package lime;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.PriorityQueue;
 import lime.DLList.Node;
 
@@ -14,16 +13,12 @@ public class Lab2b {
     Comparator<DLList.Node> comparator = new ElementComparator();
     PriorityQueue<DLList.Node> priorityQueue = new PriorityQueue<>(poly.length/2, comparator);
 
-    int lenght = poly.length;
-
     double [] pointstart = {poly[0], poly[1]};
     double [] pointstop = {poly[poly.length-2], poly[poly.length-1]};
 
 
     list.addFirst(pointstart);
     list.addLast(pointstop);
-    priorityQueue.add(list.first);
-    priorityQueue.add(list.last);
 
     Node node = list.first;
 
@@ -32,26 +27,29 @@ public class Lab2b {
       double [] point = {poly[i], poly[i+1]};
 
       node = list.insertAfter(point, node);
+
       priorityQueue.add(node);
 
     }
 
-    while((lenght / 2) > k){
-
-      list.remove(priorityQueue.element().getNext());
-      priorityQueue.remove(priorityQueue.element().getNext());
-
-      lenght = lenght-2;
+    while((priorityQueue.size() + 2) > k){
+      Node reNode = priorityQueue.remove();
+      list.remove(reNode);
 
     }
 
-    return null ;
-  }
+    double [] newPoly = new double [(k * 2)];
+    Node currnode = list.first;
+    int i = 0;
+    while (currnode != null){
 
-  private void removeElement(Node node){
+      newPoly[i] = ((double [])currnode.elt)[0];
+      newPoly[i+1] = ((double [])currnode.elt)[1];
+      currnode = currnode.getNext();
 
-    node.getNext().prev = node.getPrev();
-    node.getPrev().next = node.next;
+      i = i + 2;
 
+    }
+    return newPoly;
   }
 }
