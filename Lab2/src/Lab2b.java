@@ -14,6 +14,7 @@ public class Lab2b {
         list.addFirst(pointFirst);
         DLList.Node node = list.insertAfter(pointSecond, list.getFirst());
 
+        //adds currentNode to the list but adds the previous node (node) to the priorityQueue
         DLList.Node currentNode;
         for (int i = 4; i < poly.length; i = i + 2) {
             double[] point = {poly[i], poly[i + 1]};
@@ -23,8 +24,11 @@ public class Lab2b {
             node = currentNode;
         }
 
+        //Removes the node with highest priority from the list
+        //In order to update the priorityQueue, the previous and the next node (not the first and the last node)
+        //are first deleted from the queue and then added back to the queue.
         while (priorityQueue.size()+2 > k) {
-            DLList.Node head = priorityQueue.remove(); //O(logn) faster
+            DLList.Node head = priorityQueue.remove();
             list.remove(head);
             if (head.getPrev().getPrev() != null) {
                 priorityQueue.remove(head.getPrev());
@@ -36,6 +40,7 @@ public class Lab2b {
             }
         }
 
+        //Since the return value is an array, the DLList has to be converted to an array
         DLList<double[]>.Node curr = list.getFirst();
 
         double[] polyArray = new double[k*2];
