@@ -1,9 +1,6 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-/**
- * Created by emilaxelsson on 09/02/16.
- */
 public class Lab2b {
 
     public static double[] simplifyShape(double[] poly, int k) {

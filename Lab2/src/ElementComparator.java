@@ -1,9 +1,5 @@
-
 import java.util.Comparator;
 
-/**
- * Created by MichelleTL on 02/02/16.
- */
 public class ElementComparator implements Comparator<DLList.Node> {
 
     @Override
