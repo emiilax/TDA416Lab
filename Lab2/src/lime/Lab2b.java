@@ -36,6 +36,7 @@ public class Lab2b {
       Node reNode = priorityQueue.remove();
       list.remove(reNode);
 
+
     }
 
     double [] newPoly = new double [(k * 2)];

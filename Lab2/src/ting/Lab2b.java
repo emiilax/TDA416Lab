@@ -23,6 +23,7 @@ public class Lab2b {
         Node currentNode;
         for (int i = 4; i < poly.length; i = i + 2) {
             double[] point = {poly[i], poly[i + 1]};
+
             currentNode = list.insertAfter(point, node);
             priorityQueue.add(node);
             node = currentNode;
