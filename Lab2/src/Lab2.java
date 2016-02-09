@@ -1,5 +1,3 @@
-import ting.DrawGraph;
-import ting.Lab2b;
 
 import java.awt.*;
 import java.io.File;

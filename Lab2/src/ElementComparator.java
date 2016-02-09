@@ -12,8 +12,10 @@ public class ElementComparator implements Comparator<DLList.Node> {
         double o1Value;
         double o2Value;
 
+        // gets the value for the two nodes
         o1Value = calculateValue(o1);
         o2Value = calculateValue(o2);
+
 
         if(o2Value>o1Value){
             return -1;
@@ -22,8 +24,14 @@ public class ElementComparator implements Comparator<DLList.Node> {
         } else{
             return 1;
         }
+
     }
 
+    /**
+     * calculates the value of the node
+     * @param node, the node that you wants to calulate the value for
+     * @return value
+     */
     public double calculateValue(DLList.Node node){
         double[] L = (double[]) node.getPrev().elt;
         double[] P = (double[]) node.elt;

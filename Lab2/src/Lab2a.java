@@ -15,10 +15,13 @@ public class Lab2a {
         double l2 = 0;
         double l3 = 0;
 
+
         while(copy.length/2 > k){
 
+            // copy.length-5 since point R's Y value is in i+5
             for(int i = 0; i < copy.length-5; i = i + 2){
 
+                //Gets the points for L,P,R
                 double [] L = {copy[i], copy[i+1]};
                 double [] P = {copy[i+2], copy[i+3]};
                 double [] R = {copy[i+4], copy[i+5]};
@@ -28,14 +31,18 @@ public class Lab2a {
                 l2 = Math.sqrt(Math.pow(P[0]-R[0], 2) + Math.pow(P[1]-R[1], 2));
                 l3 = Math.sqrt(Math.pow(L[0]-R[0], 2) + Math.pow(L[1]-R[1], 2));
 
+                // calculates the value
                 currentValue = Math.abs(l1+l2-l3);
 
                 if(lowestValue > currentValue || i == 0){
                     lowestValue = currentValue;
+
+                    // position of the point P with lowest value
                     lowValPosition = i+2;
                 }
             }
 
+            //
             copy = removePoint(copy, lowValPosition);
         }
 
