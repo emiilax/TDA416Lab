@@ -61,18 +61,6 @@ public class DLList<E> {
 
         return node;
 
-        /*Node node = new Node(e);
-        node.prev = null;
-
-        if(first == null){
-            node.next = last;
-        }else{
-            node.next = first;
-        }
-
-        first = node;
-
-        return node;*/
     }
 
     /**
@@ -95,18 +83,6 @@ public class DLList<E> {
         }
         return node;
 
-        /*Node node = new Node(e);
-        node.next = null;
-
-        if(last == null) {
-            node.prev = first;
-        } else{
-            node.prev = last;
-        }
-
-        last = node;
-
-        return node;*/
     }
 
     /**
@@ -131,26 +107,16 @@ public class DLList<E> {
      * @return the node holding the inserted element
      */
     public Node insertAfter(E e, Node l) {
-
-        if (l == last) {
-            return addLast(e);
-        } else {
-            Node node = new Node(e);
-            l.next.prev = node;
-            node.next = l.next;
-            node.prev = l;
-            l.next = node;
-            return node;
-        }
-
-        /*Node node = new Node(e);
+        
+        Node node = new Node(e);
         node.prev = l;
         node.next = l.next;
 
+        //l.next.prev=node;
         l.next = node;
         if(node.next == null) last = node;
 
-        return node;*/
+        return node;
 
     }
 
@@ -169,15 +135,6 @@ public class DLList<E> {
             return insertAfter(e, l.prev);
 
         }
-        /*Node node = new Node(e);
-        node.next = l;
-        node.prev = l.prev;
-
-        l.prev = node;
-        if(node.prev == null) first = node;
-
-        return node;*/
-
 
     }
 
@@ -201,13 +158,6 @@ public class DLList<E> {
         if (l == last) {
             last = l.prev;
         }
-
-       /* l.next.prev = l.prev;
-        l.prev.next = l.next;
-
-        if((l.prev == null))first = l.next;;
-
-        if((l.next == null)) last = l.prev;*/
 
     }
 
