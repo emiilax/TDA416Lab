@@ -1,3 +1,5 @@
+package lime;
+
 import java.util.Random;
 
 class TestSetSpeed {
