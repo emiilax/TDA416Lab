@@ -81,7 +81,7 @@ public class Lab2 {
 		int j = -1; // count arguments
 		int w = 15; // width
 		int h = 15; // heigth
-		int k = 8; // take away to k points
+		int k = 6; // take away to k points
 		// tag hand om flaggorna
 		while  ( j+1 < args.length && args[j+1].charAt(0) == '-' )  {
 			j = j+1;
