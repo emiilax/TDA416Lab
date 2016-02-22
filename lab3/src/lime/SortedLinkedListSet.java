@@ -83,7 +83,7 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
 
     private boolean removeRec(Node<E> node, E x){
 
-        if(first == null) return false;
+        if(node == null) return false;
 
         int comp = x.compareTo(node.elt);
 

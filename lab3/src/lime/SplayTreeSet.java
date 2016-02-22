@@ -1,5 +1,9 @@
 package lime;
 
+import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
+
+import java.util.Random;
+
 /**
  * Created by emilaxelsson on 12/02/16.
  */
@@ -48,6 +52,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         int comp = x.compareTo(node.elt);
 
+
         if(comp == 0){
             return false;
 
@@ -68,6 +73,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
                 node.left = new Node(x, node, null, null);
                 size++;
                 if(size > 1) splayElement(node.left);
+
                 return true;
             }
 
@@ -80,12 +86,8 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     @Override
     public boolean remove(E x) {
 
+        return removeRec(root, x);
 
-        removeRec(root, x);
-
-
-
-        return false;
     }
 
 
@@ -101,7 +103,16 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
                 splayElement(node);
             }
 
-            Node n = deleteMaxLeft(node.left);
+
+            if(node.left != null){
+                Node<E> n = deleteMaxLeft(node.left);
+                node.elt = n.elt;
+            } else if(node.right != null){
+                root = node.right;
+                node.right.parent = null;
+            }
+            size--;
+            return true;
 
         } else if(comp<0){
             return removeRec(node.left, x);
@@ -114,10 +125,9 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     private Node<E> deleteMaxLeft(Node<E> node){
 
         if(node.right == null) {
-            Node n = node;
-            node.parent.right = null;
-            node.
-            return node ;
+            node.parent.left = node.left;
+            node.parent = null;
+            return node;
         }
 
         return deleteMaxLeft(node.right);
@@ -138,7 +148,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         int comp = x.compareTo(node.elt);
         if( comp == 0 ){
-            System.out.println("equal");
             splayElement(node);
             return true;
         }else if(comp < 0){
@@ -148,9 +157,12 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
     }
 
 
-    private void splayElement(Node<E> node){
+    private void splayElement(Node<E> node) {
 
-        if(node.equals(root)) return;
+        if (node == root){
+            //System.out.println("return");
+            return;
+        }
 
         if(node.parent.parent == null){
             if (node.parent.right == node) {
@@ -158,7 +170,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             } else if (node.parent.left == node) {
                 rotateRight(node);
             }
-        }else if((node.parent.right == node) && (node.parent.parent.right == node.parent)){
+        }else if( (node.parent.right == node)  &&  (node.parent.parent.right == node.parent) ){
             //zig-zig to left
             rotateLeft(node.parent);
             rotateLeft(node);
@@ -182,7 +194,22 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     private void rotateRight(Node<E> node) {
         node.parent.left = node.right;
+
+        if(node.right != null){
+            node.right.parent = node.parent;
+        }
+
         node.right = node.parent;
+
+        if(node.parent.parent != null){
+
+            if(node.parent.parent.right == node.parent){
+                node.parent.parent.right = node;
+            }else if(node.parent.parent.left == node.parent){
+                node.parent.parent.left = node;
+            }
+            //node.parent = node.parent.parent;
+        }
 
         Node newParent = node.parent.parent;
         node.parent.parent = node;
@@ -194,7 +221,24 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     private void rotateLeft(Node<E> node) {
         node.parent.right = node.left;
+        if(node.left != null ) {
+            node.left.parent = node.parent;
+        }
+
         node.left = node.parent;
+
+
+        if(node.parent.parent != null){
+
+            if(node.parent.parent.right == node.parent){
+                node.parent.parent.right = node;
+
+            }else if(node.parent.parent.left == node.parent){
+                node.parent.parent.left = node;
+            }
+            //node.parent = node.parent.parent;
+        }
+
 
         Node newParent = node.parent.parent;
         node.parent.parent = node;
@@ -209,18 +253,37 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         SplayTreeSet<Integer> sts = new SplayTreeSet<>();
 
-        sts.add(5);
-        sts.add(3);
-        sts.add(7);
-        sts.add(11);
-        sts.add(10);
+        sts.add(103);
+        sts.add(14);
+        sts.add(19);
+        sts.add(53);
+        sts.add(40);
+        sts.add(165);
+        sts.add(155);
+        /*
+        sts.add(120);
+        sts.add(81);
+        sts.add(92);
+        sts.add(68);
+        sts.add(12);
+        sts.add(44);
+        sts.add(29);*/
 
-        System.out.println(sts.root.elt);
+        /*
+        Random rand = new Random();
+
+        for(int i = 0; i < 10 ; i++){
+            sts.add(rand.nextInt(200));
+        }*/
+
+        /*System.out.println(sts.root.elt);
         System.out.println(sts.root.left.left.elt);
         System.out.println(sts.root.right.elt);
 
         System.out.println("Contains 7 " + sts.contains(7));
         System.out.println(sts.root.elt);
+        System.out.println(sts.remove(7));
+        System.out.println("Contains 11 " + sts.contains(5));*/
     }
 
 
