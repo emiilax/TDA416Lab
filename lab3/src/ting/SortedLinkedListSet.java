@@ -78,49 +78,69 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     }
 
     private boolean removeRecurisve(Node<E> node, E x) {
-        if (node == null) {
-            return false;
-        }
+
+        if(node == null) return false;
 
         int comp = x.compareTo(node.data);
-//        if (comp == 0) {
-//            if (node.prev == null) {
-//                node.next.prev = null;
-//            } else {
-//                node.prev.next = node.next;
-//            }
-//            if (node.next == null) {
-//                node.prev.next = null;
-//            } else {
-//                node.next.prev = node.prev;
-//            }
-//            size--;
-//            return true;
-//        } else {
-//            if (node.next != null) {
-//                return removeRecurisve(node.next, x);
-//            } else {
-//                return false;
-//            }
-//        }
-        if (comp == 0) {
-            if (node.prev == null) {
+
+        if(comp == 0){
+            if(node.prev == null){
                 first = node.next;
             }
-            if (node.next != null) {
-                node.next.prev = node.prev;
-            }
-            if (node.prev != null) {
-                node.prev.next = node.next;
+            if(node.next != null) node.next.prev = node.prev;
 
-                size--;
-                return true;
-            }
-        } else if (comp > 0) {
+            if(node.prev != null) node.prev.next = node.next;
+
+            size--;
+            return true;
+        }else if(comp > 0){
             removeRecurisve(node.next, x);
         }
-
         return false;
+
+//        if (node == null) {
+//            return false;
+//        }
+//
+//        int comp = x.compareTo(node.data);
+////        if (comp == 0) {
+////            if (node.prev == null) {
+////                node.next.prev = null;
+////            } else {
+////                node.prev.next = node.next;
+////            }
+////            if (node.next == null) {
+////                node.prev.next = null;
+////            } else {
+////                node.next.prev = node.prev;
+////            }
+////            size--;
+////            return true;
+////        } else {
+////            if (node.next != null) {
+////                return removeRecurisve(node.next, x);
+////            } else {
+////                return false;
+////            }
+////        }
+//        if (comp == 0) {
+//            if (node.prev == null) {
+//                first = node.next;
+//            }
+//            if (node.next != null) {
+//                node.next.prev = node.prev;
+//            }
+//            if (node.prev != null) {
+//                node.prev.next = node.next;
+//
+//                size--;
+//                return true;
+//            }
+//        } else if (comp > 0) {
+//            removeRecurisve(node.next, x);
+//        }
+//
+//        return false;
 
     }
 
