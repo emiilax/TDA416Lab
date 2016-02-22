@@ -49,30 +49,34 @@ public class TestSetCorrectness {
 //                System.out.println("Im here " + randomOperation + " " + operationValue);
                 switch (randomOperation) {
                     case 0: //test size
-                        System.out.println("Testing size ");
+                        //System.out.println("Testing size ");
                         if (simpleSet.size() != javaSet.size()) {
                             System.out.println("Error occured during size()!");
                             break;
                         }
                     case 1: //test add
-                        System.out.println("Testing add " + operationValue);
+                        //System.out.println("Testing add " + operationValue);
+                        
                         if (simpleSet.add(operationValue) != javaSet.add(operationValue)) {
                             System.out.println("Error occured during add()");
                             return;
                         }
                     case 2: //test contains
-                        System.out.println("Testing contains " + operationValue);
+                        //System.out.println("Testing contains " + operationValue);
                         if (simpleSet.contains(operationValue) != javaSet.contains(operationValue)) {
                             System.out.println("Error occured during contains()");
                             return;
                         }
                     case 3: //test remove
-                        System.out.println("Testing remove: OperationValue " + operationValue + ". SimpleSet.remove: "+ simpleSet.remove(operationValue) + " JavaSet.remove " + javaSet.remove(operationValue));
-                        return;
-//  if (simpleSet.remove(operationValue) != javaSet.remove(operationValue)) {
-//                            System.out.println("Error occured during remove()");
-//                            return;
-//                        }
+
+                        boolean ssbool = simpleSet.remove(operationValue);
+                        boolean jsbool = javaSet.remove(operationValue);
+                       // System.out.println("operation value " + operationValue);
+
+                        if ( ssbool != jsbool) {
+                           // System.out.println("Error occured during remove() " + ssbool +" != "+ jsbool);
+                            return;
+                        }
                 }
 //                System.out.println("Passed all the cases");
 

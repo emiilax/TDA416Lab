@@ -107,10 +107,14 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             if(node.left != null){
                 Node<E> n = deleteMaxLeft(node.left);
                 node.elt = n.elt;
-            } else if(node.right != null){
+            }
+
+            if(node.right != null){
                 root = node.right;
                 node.right.parent = null;
             }
+            if(root == node && size == 1) root = null;
+
             size--;
             return true;
 
@@ -253,13 +257,20 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         SplayTreeSet<Integer> sts = new SplayTreeSet<>();
 
-        sts.add(103);
-        sts.add(14);
-        sts.add(19);
-        sts.add(53);
-        sts.add(40);
-        sts.add(165);
-        sts.add(155);
+
+        sts.remove(7);
+        sts.add(13);
+        sts.remove(13);
+        sts.add(8);
+        sts.remove(8);
+        sts.add(17);
+        sts.remove(17);
+        sts.remove(14);
+        sts.add(9);
+        sts.remove(9);
+        sts.add(4);
+        sts.remove(4);
+        System.out.println(sts.remove(13));
         /*
         sts.add(120);
         sts.add(81);
