@@ -16,8 +16,8 @@ class TestSetSpeed {
   final int bound = 2 * size;
 
   Random rand = new Random();
-
   while (set.size() < size) {
+
    set.add(new Integer(rand.nextInt(bound)));
   }
 
