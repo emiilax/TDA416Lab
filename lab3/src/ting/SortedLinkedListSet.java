@@ -17,8 +17,8 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     private int size = 0;
 
     public SortedLinkedListSet() {
-        size=0;
-        first=null;
+        size = 0;
+        first = null;
     }
 
     @Override
@@ -78,27 +78,50 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     }
 
     private boolean removeRecurisve(Node<E> node, E x) {
+        if (node == null) {
+            return false;
+        }
+
         int comp = x.compareTo(node.data);
+//        if (comp == 0) {
+//            if (node.prev == null) {
+//                node.next.prev = null;
+//            } else {
+//                node.prev.next = node.next;
+//            }
+//            if (node.next == null) {
+//                node.prev.next = null;
+//            } else {
+//                node.next.prev = node.prev;
+//            }
+//            size--;
+//            return true;
+//        } else {
+//            if (node.next != null) {
+//                return removeRecurisve(node.next, x);
+//            } else {
+//                return false;
+//            }
+//        }
         if (comp == 0) {
             if (node.prev == null) {
-                node.next.prev = null;
-            } else {
-                node.prev.next = node.next;
+                first = node.next;
             }
-            if (node.next == null) {
-                node.prev.next = null;
-            } else {
+            if (node.next != null) {
                 node.next.prev = node.prev;
             }
-            size--;
-            return true;
-        } else {
-            if (node.next != null) {
-                return removeRecurisve(node.next, x);
-            } else {
-                return false;
+            if (node.prev != null) {
+                node.prev.next = node.next;
+
+                size--;
+                return true;
             }
+        } else if (comp > 0) {
+            removeRecurisve(node.next, x);
         }
+
+        return false;
+
     }
 
     @Override
@@ -120,30 +143,30 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
     }
 
     public static void main(String[] args) {
-        SortedLinkedListSet<Integer> list = new SortedLinkedListSet<>();
-
-        list.add(new Integer(4));
-        list.add(new Integer(3));
-        list.add(new Integer(7));
-        list.add(new Integer(1));
-
-        Node n = list.first;
-        while (n != null) {
-            System.out.println(n.data);
-
-            n = n.next;
-        }
-        System.out.println();
-
-        System.out.println(list.contains(3));
-
-        Node n1 = list.first;
-        while (n1 != null) {
-            System.out.println(n1.data);
-
-            n1 = n1.next;
-        }
-        System.out.println();
+//        SortedLinkedListSet<Integer> list = new SortedLinkedListSet<>();
+//
+//        list.add(new Integer(4));
+//        list.add(new Integer(3));
+//        list.add(new Integer(7));
+//        list.add(new Integer(1));
+//
+//        Node n = list.first;
+//        while (n != null) {
+//            System.out.println(n.data);
+//
+//            n = n.next;
+//        }
+//        System.out.println();
+//
+//        System.out.println(list.contains(3));
+//
+//        Node n1 = list.first;
+//        while (n1 != null) {
+//            System.out.println(n1.data);
+//
+//            n1 = n1.next;
+//        }
+//        System.out.println();
 
     }
 }
