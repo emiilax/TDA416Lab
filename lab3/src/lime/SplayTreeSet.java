@@ -15,11 +15,11 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             left = l;
             right = r;
         }
+
     }
 
     private int size;
     private Node<E> root;
-
 
     public SplayTreeSet(){
         size = 0;
@@ -79,14 +79,73 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     @Override
     public boolean remove(E x) {
+
+
+        removeRec(root, x);
+
+
+
         return false;
     }
+
+
+    private boolean removeRec(Node<E> node, E x){
+
+        if(node == null) return false;
+
+        int comp = x.compareTo(node.elt);
+
+        if(comp == 0){
+
+            if(node != root){
+                splayElement(node);
+            }
+
+            Node n = deleteMaxLeft(node.left);
+
+        } else if(comp<0){
+            return removeRec(node.left, x);
+        }
+
+        return removeRec(node.right, x);
+
+    }
+
+    private Node<E> deleteMaxLeft(Node<E> node){
+
+        if(node.right == null) {
+            Node n = node;
+            node.parent.right = null;
+            node.
+            return node ;
+        }
+
+        return deleteMaxLeft(node.right);
+
+    }
+
 
     @Override
     public boolean contains(E x) {
-        return false;
+
+        return containsRec(root, x);
+
     }
 
+    private boolean containsRec(Node<E> node, E x){
+
+        if(node == null) return false;
+
+        int comp = x.compareTo(node.elt);
+        if( comp == 0 ){
+            System.out.println("equal");
+            splayElement(node);
+            return true;
+        }else if(comp < 0){
+            return containsRec(node.left, x);
+        }
+        return  containsRec(node.right, x);
+    }
 
 
     private void splayElement(Node<E> node){
@@ -146,10 +205,9 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     }
 
-    static SplayTreeSet<Integer> sts;
     public static void main(String [] args){
 
-        sts = new SplayTreeSet<>();
+        SplayTreeSet<Integer> sts = new SplayTreeSet<>();
 
         sts.add(5);
         sts.add(3);
@@ -160,6 +218,9 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
         System.out.println(sts.root.elt);
         System.out.println(sts.root.left.left.elt);
         System.out.println(sts.root.right.elt);
+
+        System.out.println("Contains 7 " + sts.contains(7));
+        System.out.println(sts.root.elt);
     }
 
 
