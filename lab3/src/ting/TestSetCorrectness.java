@@ -48,30 +48,33 @@ public class TestSetCorrectness {
 //                System.out.println("Im here " + randomOperation + " " + operationValue);
                 switch (randomOperation) {
                     case 0: //test size
-                        System.out.println("Testing size ");
+//                        System.out.println("Testing size.");
                         if (simpleSet.size() != javaSet.size()) {
                             System.out.println("Error occured during size()!");
                             return;
                         }
                         break;
                     case 1: //test add
-                        System.out.println("Testing add " + operationValue);
+//                        System.out.println("Testing add " + operationValue);
+                        System.out.println("sts.add("+operationValue+");");
                         if (simpleSet.add(operationValue) != javaSet.add(operationValue)) {
-                            System.out.println("Error occured during add()");
+                            System.out.println("Error occured during add("+operationValue+")");
                             return;
                         }
                         break;
                     case 2: //test contains
-                        System.out.println("Testing contains " + operationValue);
+//                        System.out.println("Testing contains " + operationValue);
+                        System.out.println("sts.contains("+operationValue+");");
                         if (simpleSet.contains(operationValue) != javaSet.contains(operationValue)) {
-                            System.out.println("Error occured during contains()");
+                            System.out.println("Error occured during contains("+operationValue+")");
                             return;
                         }
                         break;
                     case 3: //test remove
-                        System.out.println("Testing remove: OperationValue " + operationValue + ". SimpleSet.remove: " + simpleSet.remove(operationValue) + " JavaSet.remove " + javaSet.remove(operationValue));
+//                        System.out.println("Testing remove "+ operationValue);
+                        System.out.println("sts.remove("+operationValue+");");
                         if (simpleSet.remove(operationValue) != javaSet.remove(operationValue)) {
-                            System.out.println("Error occured during remove()");
+                            System.out.println("Error occured during remove("+operationValue+")");
                             return;
                         }
                         break;
