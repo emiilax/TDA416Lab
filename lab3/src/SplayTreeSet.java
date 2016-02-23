@@ -1,7 +1,6 @@
-/**
- * Created by MichelleTL on 23/02/16.
- */
-public class SplayTreeSet {
+
+
+public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<E> {
 
 
     static protected class Node<E> {
