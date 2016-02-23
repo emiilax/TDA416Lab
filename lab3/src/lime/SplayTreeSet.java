@@ -1,5 +1,6 @@
 package lime;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import com.sun.tools.internal.ws.wsdl.document.soap.SOAPUse;
 
 import java.util.Random;
@@ -99,24 +100,33 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
         if(comp == 0){
 
+
             if(node != root){
                 splayElement(node);
             }
 
-
             if(node.left != null){
-                Node<E> n = deleteMaxLeft(node.left);
-                node.elt = n.elt;
+                Node<E> n = node.right;
+                root = root.left;
+                root.parent = null;
+
+                splayElement(findMinLeft(node.left));
+
+                root.right = n;
+                if(root.right != null) root.right.parent = root;
+
+
+
+            } else if(node.right != null){
+                Node<E> n = root.left;
+                root = root.right;
+                root.parent = null;
             }
 
-            if(node.right != null){
-                root = node.right;
-                node.right.parent = null;
-            }
             if(root == node && size == 1) root = null;
-
             size--;
             return true;
+
 
         } else if(comp<0){
             return removeRec(node.left, x);
@@ -126,16 +136,15 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     }
 
-    private Node<E> deleteMaxLeft(Node<E> node){
 
-        if(node.right == null) {
-            node.parent.left = node.left;
-            node.parent = null;
+    private Node<E> findMinLeft(Node<E> node){
+
+        if(node.right == null){
+
             return node;
+
         }
-
-        return deleteMaxLeft(node.right);
-
+        return findMinLeft(node.right);
     }
 
 
@@ -151,22 +160,21 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
         if(node == null) return false;
 
         int comp = x.compareTo(node.elt);
+
         if( comp == 0 ){
             splayElement(node);
             return true;
         }else if(comp < 0){
             return containsRec(node.left, x);
         }
+
         return  containsRec(node.right, x);
     }
 
 
     private void splayElement(Node<E> node) {
 
-        if (node == root){
-            //System.out.println("return");
-            return;
-        }
+        if (node == root) return;
 
         if(node.parent.parent == null){
             if (node.parent.right == node) {
@@ -196,6 +204,8 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     }
 
+
+
     private void rotateRight(Node<E> node) {
         node.parent.left = node.right;
 
@@ -212,7 +222,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             }else if(node.parent.parent.left == node.parent){
                 node.parent.parent.left = node;
             }
-            //node.parent = node.parent.parent;
+
         }
 
         Node newParent = node.parent.parent;
@@ -240,7 +250,7 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
             }else if(node.parent.parent.left == node.parent){
                 node.parent.parent.left = node;
             }
-            //node.parent = node.parent.parent;
+
         }
 
 
@@ -253,48 +263,55 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
 
     }
 
-    public static void main(String [] args){
 
+
+    public static void main(String [] args){
         SplayTreeSet<Integer> sts = new SplayTreeSet<>();
 
+        sts.add(5);
+
+        sts.remove(8);
+
+        sts.add(0);
+
+        sts.remove(10);
+        sts.remove(13);
+        sts.remove(19);
+        sts.remove(0);
+        sts.remove(4);
+        sts.remove(2);
+
+        sts.add(7);
+
+        sts.remove(12);
+
+        sts.add(7);
+
+        sts.remove(2);
+        sts.remove(0);
+        sts.remove(12);
+
+        sts.add(12);
+
+        sts.remove(17);
+        sts.remove(9);
+        sts.remove(7);
+
+        sts.add(13);
+
+        sts.remove(15);
+        sts.remove(9);
+
+        sts.add(0);
+        sts.add(0);
 
         sts.remove(7);
-        sts.add(13);
-        sts.remove(13);
-        sts.add(8);
-        sts.remove(8);
-        sts.add(17);
-        sts.remove(17);
-        sts.remove(14);
-        sts.add(9);
-        sts.remove(9);
-        sts.add(4);
-        sts.remove(4);
-        System.out.println(sts.remove(13));
-        /*
-        sts.add(120);
-        sts.add(81);
-        sts.add(92);
-        sts.add(68);
-        sts.add(12);
-        sts.add(44);
-        sts.add(29);*/
+        sts.remove(12);
+        sts.remove(18);
 
-        /*
-        Random rand = new Random();
+        sts.add(0);
+        System.out.println(sts.add(5));
 
-        for(int i = 0; i < 10 ; i++){
-            sts.add(rand.nextInt(200));
-        }*/
-
-        /*System.out.println(sts.root.elt);
-        System.out.println(sts.root.left.left.elt);
-        System.out.println(sts.root.right.elt);
-
-        System.out.println("Contains 7 " + sts.contains(7));
-        System.out.println(sts.root.elt);
-        System.out.println(sts.remove(7));
-        System.out.println("Contains 11 " + sts.contains(5));*/
     }
 
 
