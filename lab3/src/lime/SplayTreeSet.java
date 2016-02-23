@@ -115,8 +115,6 @@ public class SplayTreeSet<E extends Comparable<? super E>> implements SimpleSet<
                 root.right = n;
                 if(root.right != null) root.right.parent = root;
 
-
-
             } else if(node.right != null){
                 Node<E> n = root.left;
                 root = root.right;
