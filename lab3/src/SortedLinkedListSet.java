@@ -25,6 +25,11 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
         return size;
     }
 
+    /**
+     * Adds a new node to the list using an recursive add-method
+     * @param x the value of the new node
+     * @return  returns true if the new node is added to the list, returns false if the value fails to be added to the list
+     */
     @Override
     public boolean add(E x) {
         Node node;
@@ -38,6 +43,13 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
         return addRec(first, x);
     }
 
+    /**
+     * The recursive add-method. By comparing the elt of the nodes, it determines the position of the new node
+     *
+     * @param node the node the method starts to compare with, in this case the root
+     * @param e the value of the new node
+     * @return returns true if the new node is added to the list, returns false if the value fails to be added to the list
+     */
     private boolean addRec(Node<E> node, E e){
 
         int comp = e.compareTo(node.elt);
@@ -70,12 +82,24 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
 
     }
 
+    /**
+     * Removes a node from the list by calling the recursive remove-function
+     * @param x the data-value of a node that is going to be removed
+     * @return Returns true if the node is removed from the list, returns false if it fails to remove it
+     */
     @Override
     public boolean remove(E x) {
 
         return removeRec(first, x);
     }
 
+
+    /**
+     * The recursive remove-method. By finding the node that contains x as its elt, the method knows which node that is going to be removed
+     * @param node the node the method starts to compare with, in this case the root
+     * @param x the value of the node that is going to be removed
+     * @return returns true if the node is removed, returns false if it fails to remove the node
+     */
     private boolean removeRec(Node<E> node, E x){
 
         if(node == null) return false;
@@ -98,11 +122,22 @@ public class SortedLinkedListSet<E extends Comparable<? super E>> implements Sim
         return false;
     }
 
+    /**
+     * Finds the node containing an elt as x using an recursive contain-method
+     * @param x the value of the target node
+     * @return returns true if list contains a node with that elt, returns false if there is not
+     */
     @Override
     public boolean contains(E x) {
         return containsRec(first, x);
     }
 
+    /**
+     * The recursive contain-method. Finds the target node by comparing the value of each node
+     * @param node the node the method starts to compare with, in this case the root
+     * @param x the value of the target node
+     * @return returns true if the node is found, returns false if it fails
+     */
     private boolean containsRec(Node<E> node, E x){
 
         if(node == null) return false;
