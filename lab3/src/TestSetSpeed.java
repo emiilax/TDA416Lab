@@ -1,6 +1,3 @@
-import lime.*;
-import lime.SortedLinkedListSet;
-import lime.SplayTreeSet;
 
 import java.util.Random;
 
@@ -11,7 +8,7 @@ public class TestSetSpeed {
 
         final int implnumber = Integer.parseInt(args[0]);
 
-        lime.SimpleSet<Integer> set =
+        SimpleSet<Integer> set =
                 implnumber == 1 ? new SortedLinkedListSet<Integer>() : new SplayTreeSet<Integer>();
 
         final int size = Integer.parseInt(args[1]);
@@ -60,4 +57,5 @@ public class TestSetSpeed {
         System.out.println("operations: " + ops);
         System.out.println("time/operation: " + (double)(endTime - startTime) * 1e6 / (double)ops + "ns");
     }
+
 }
