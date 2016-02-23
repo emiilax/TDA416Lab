@@ -13,17 +13,18 @@ public class TestSetCorrectness {
 
     public static void main(String[] args) {
 
-        //check the arguments
+        //check if the arguments given are valid
         try {
-            n1 = Integer.parseInt(args[0]); //n1 är sortedLinkedListSet
-            n2 = Integer.parseInt(args[1]); //n2 om SplayTreSet
-            n3 = Integer.parseInt(args[2]); //n3 antal slumpoperationer som ska utföras mellan varje omstart
-            n4 = Integer.parseInt(args[3]); //n4 antal olika heltal som slumpvis används vid operationerna
+            n1 = Integer.parseInt(args[0]);
+            n2 = Integer.parseInt(args[1]);
+            n3 = Integer.parseInt(args[2]);
+            n4 = Integer.parseInt(args[3]);
         } catch (NumberFormatException e) {
             System.out.println("Illegal arguments");
             return;
         }
 
+        //loops through the test n2-times
         for (int j = 0; j < n2; j++) {
 
             SimpleSet<Integer> simpleSet;
@@ -39,47 +40,42 @@ public class TestSetCorrectness {
                 return;
             }
 
-            //randomly test size, add, remove, contain
             Random randomGen = new Random();
 
+            //tests different operations n3 times
             for (int i = 0; i < n3; i++) {
                 int randomOperation = randomGen.nextInt(4);
                 int operationValue = randomGen.nextInt(n4);
-//                System.out.println("Im here " + randomOperation + " " + operationValue);
                 switch (randomOperation) {
-                    case 0: //test size
-//                        System.out.println("Testing size.");
+                    case 0:
+                        System.out.println("Testing size.");
                         if (simpleSet.size() != javaSet.size()) {
                             System.out.println("Error occured during size()!");
                             return;
                         }
                         break;
-                    case 1: //test add
-//                        System.out.println("Testing add " + operationValue);
-                        System.out.println("sts.add("+operationValue+");");
+                    case 1:
+                        System.out.println("Testing add " + operationValue);
                         if (simpleSet.add(operationValue) != javaSet.add(operationValue)) {
                             System.out.println("Error occured during add("+operationValue+")");
                             return;
                         }
                         break;
-                    case 2: //test contains
-//                        System.out.println("Testing contains " + operationValue);
-                        System.out.println("sts.contains("+operationValue+");");
+                    case 2:
+                        System.out.println("Testing contains " + operationValue);
                         if (simpleSet.contains(operationValue) != javaSet.contains(operationValue)) {
                             System.out.println("Error occured during contains("+operationValue+")");
                             return;
                         }
                         break;
-                    case 3: //test remove
-//                        System.out.println("Testing remove "+ operationValue);
-                        System.out.println("sts.remove("+operationValue+");");
+                    case 3:
+                        System.out.println("Testing remove "+ operationValue);
                         if (simpleSet.remove(operationValue) != javaSet.remove(operationValue)) {
                             System.out.println("Error occured during remove("+operationValue+")");
                             return;
                         }
                         break;
                 }
-//                System.out.println("Passed all the cases");
 
             }
         }
