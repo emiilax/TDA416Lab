@@ -47,7 +47,7 @@ public class TestSetCorrectness {
                 int operationValue = randomGen.nextInt(n4);
                 switch (randomOperation) {
                     case 0:
-                        //System.out.println("Testing size.");
+                        //testing size
                         if (simpleSet.size() != javaSet.size()) {
                             System.out.println("Error occured during size()!");
                             System.out.println("simpleSet.size(): " + simpleSet.size());
@@ -56,7 +56,7 @@ public class TestSetCorrectness {
                         }
                         break;
                     case 1:
-                        //System.out.println("Testing add " + operationValue);
+                        //testing add
                         boolean addSimpleset = simpleSet.add(operationValue);
                         boolean addJavaSet = javaSet.add(operationValue);
                         if ( addSimpleset != addJavaSet) {
@@ -67,7 +67,7 @@ public class TestSetCorrectness {
                         }
                         break;
                     case 2:
-                        //System.out.println("Testing contains " + operationValue);
+                        //Testing contains
                         boolean containsSimpleSet = simpleSet.contains(operationValue);
                         boolean containsJavaSet = javaSet.contains(operationValue);
                         if ( containsSimpleSet != containsJavaSet) {
@@ -78,7 +78,7 @@ public class TestSetCorrectness {
                         }
                         break;
                     case 3:
-                        //System.out.println("Testing remove "+ operationValue);
+                        //Testing remove;
                         boolean removeSimpleSet = simpleSet.remove(operationValue);
                         boolean removeJavaSet = javaSet.remove(operationValue);
                         if (removeSimpleSet != removeJavaSet) {
