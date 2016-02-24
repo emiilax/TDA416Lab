@@ -47,30 +47,44 @@ public class TestSetCorrectness {
                 int operationValue = randomGen.nextInt(n4);
                 switch (randomOperation) {
                     case 0:
-                        System.out.println("Testing size.");
+                        //System.out.println("Testing size.");
                         if (simpleSet.size() != javaSet.size()) {
                             System.out.println("Error occured during size()!");
+                            System.out.println("simpleSet.size(): " + simpleSet.size());
+                            System.out.println("javaSet.size()  : " + javaSet.size());
                             return;
                         }
                         break;
                     case 1:
-                        System.out.println("Testing add " + operationValue);
-                        if (simpleSet.add(operationValue) != javaSet.add(operationValue)) {
+                        //System.out.println("Testing add " + operationValue);
+                        boolean addSimpleset = simpleSet.add(operationValue);
+                        boolean addJavaSet = javaSet.add(operationValue);
+                        if ( addSimpleset != addJavaSet) {
                             System.out.println("Error occured during add("+operationValue+")");
+                            System.out.println("simpleSet.add() returned: " + addSimpleset);
+                            System.out.println("javaSet.add() returned  : " + addJavaSet);
                             return;
                         }
                         break;
                     case 2:
-                        System.out.println("Testing contains " + operationValue);
-                        if (simpleSet.contains(operationValue) != javaSet.contains(operationValue)) {
+                        //System.out.println("Testing contains " + operationValue);
+                        boolean containsSimpleSet = simpleSet.contains(operationValue);
+                        boolean containsJavaSet = javaSet.contains(operationValue);
+                        if ( containsSimpleSet != containsJavaSet) {
                             System.out.println("Error occured during contains("+operationValue+")");
+                            System.out.println("simpleSet.contains() returned: " + containsSimpleSet);
+                            System.out.println("javaSet.contains() returned  : " + containsJavaSet);
                             return;
                         }
                         break;
                     case 3:
-                        System.out.println("Testing remove "+ operationValue);
-                        if (simpleSet.remove(operationValue) != javaSet.remove(operationValue)) {
+                        //System.out.println("Testing remove "+ operationValue);
+                        boolean removeSimpleSet = simpleSet.remove(operationValue);
+                        boolean removeJavaSet = javaSet.remove(operationValue);
+                        if (removeSimpleSet != removeJavaSet) {
                             System.out.println("Error occured during remove("+operationValue+")");
+                            System.out.println("simpleSet.remove() returned : " + removeSimpleSet);
+                            System.out.println("javaSet.remove() returened  : " + removeJavaSet);
                             return;
                         }
                         break;
