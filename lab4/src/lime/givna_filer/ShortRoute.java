@@ -142,10 +142,10 @@ public class ShortRoute extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == from) {
 			String tmpFrom = from.getText().trim();
-			String tmpTo   = to.getText().trim();
-			if ( tmpFrom.equals("MST") || tmpFrom.equals("mst") )
+			String tmpTo = to.getText().trim();
+			if (tmpFrom.equals("MST") || tmpFrom.equals("mst")){
 				findMinSpan();
-			else {
+			}else {
 				try{ // check if from exists
 					//String str = from.getText();
 					// fixa så man kan skippa att skriva första med stor bokstav
@@ -166,9 +166,9 @@ public class ShortRoute extends JFrame implements ActionListener {
 		else if (e.getSource() == to) {
 			String tmpFrom = from.getText().trim();
 			String tmpTo = to.getText().trim();
-			if ( tmpTo.equals("MST") || tmpTo.equals("mst") )
+			if ( tmpTo.equals("MST") || tmpTo.equals("mst") ) {
 				findMinSpan();
-			else {
+			}else {
 				try{ // check if to exists
 					//String str = to.getText();
 					tmpTo = Character.toUpperCase(tmpTo.charAt(0)) + tmpTo.substring(1);
@@ -199,8 +199,11 @@ public class ShortRoute extends JFrame implements ActionListener {
 			double totWeight = 0;
 			int    totNodes  = 0;  // only for easier testing
 			karta.clearLayer(DrawGraph.Layer.OVERLAY);
+			System.out.println("MST");
+
 			while ( it.hasNext() ) {
 				BusEdge be = it.next();
+				System.out.println("From: " + be.from + ", to: " + be.to);
 				totNodes++;
 				totWeight += be.getWeight();
 				route.append(  makeText2(be) + "\n");
@@ -220,6 +223,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 	} //  findMinSpan
 	// ====================================================================
 	private void findShort() {
+		System.out.println("Find short");
 		// svårt att behålla linjefärgerna?
 		int start, slut;
 		try{ // read from station
@@ -261,7 +265,8 @@ public class ShortRoute extends JFrame implements ActionListener {
 		from.setText("");
 		to.setText("");
 
-	}  // findShort
+	}
+	// findShort
 	// ====================================================================
 
 	private String makeText1(BusEdge be) {
@@ -290,7 +295,9 @@ public class ShortRoute extends JFrame implements ActionListener {
 			// Read stops and put them in the node-table
 			// in order to give the user a list of possible stops
 			// assume input file is correct
-			indata = new Scanner(new File("stops.noBOM.txt"), "UTF-8");
+			File f1 = new File(ShortRoute.class.getResource("stops.noBOM.txt").getFile());
+
+			indata = new Scanner(f1, "UTF-8");
 			while (indata.hasNext()) {
 				String hpl = indata.next().trim();
 				int xco = indata.nextInt();
@@ -308,8 +315,10 @@ public class ShortRoute extends JFrame implements ActionListener {
 			indata.close();
 
 			//  Read in the lines and add to the graph
-			indata =  new Scanner(new File("lines.noBOM.txt"), "UTF-8");
+			File f2 = new File(ShortRoute.class.getResource("lines.noBOM.txt").getFile());
+			indata =  new Scanner(f2, "UTF-8");
 			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
+
 			while ( indata.hasNext() ) {
 				String lineNo = indata.next();
 				int    antal  = indata.nextInt() -1;
@@ -322,6 +331,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 										(float)Math.random());
 				for (int i = 0; i < antal; i++ ) {
 					int to = noderna.find( indata.next() ).getNodeNo();
+					System.out.println("from: " + from + ", to: " + to);
 					grafen.addEdge(
 						new BusEdge(from, to, indata.nextInt(), lineNo ));
 					// Draw
@@ -386,6 +396,7 @@ public class ShortRoute extends JFrame implements ActionListener {
 			while ( indata.hasNext() ) { // assume lines are correct
 				int from = noderna.find( indata.next() ).getNodeNo();
 				int to   = noderna.find( indata.next() ).getNodeNo();
+
 				grafen.addEdge(new BusEdge(from, to, indata.nextInt(), lineNo ));
 				indata.nextLine(); // skip rest of line
 				// Draw
