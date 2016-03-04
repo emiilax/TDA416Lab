@@ -68,21 +68,104 @@ public class DirectedGraph<E extends Edge> {
 
 	}
 
-    private class DijkstraCompPath implements Comparator<E> {
+    private class DijkstraCompPath implements Comparable {
 
-        @Override
-        public int compare(E o1, E o2) {
-            return 0;
+
+
+        private int node;
+        private Set<E> path;
+        private double weight;
+
+        private DijkstraCompPath(int node){
+            this.node = node;
+            this.path = new HashSet<>();
+            weight = 0;
+        }
+
+        private DijkstraCompPath(int node, Set<E> set){
+            this.node = node;
+            this.path = new HashSet<>();
+            this.path.addAll(set);
+
+            setWeight();
         }
 
 
+        private void setWeight(){
+            Iterator<E> iter = this.path.iterator();
+            double sum = 0;
+
+            while(iter.hasNext()){
+                sum += iter.next().getWeight();
+            }
+
+            weight = sum;
+        }
+
+        private void addEdge(E e){
+            path.add(e);
+            weight += e.getWeight();
+        }
+
+        private void addPath(Set<E> set){
+            this.path.addAll(set);
+            setWeight();
+        }
+
+        @Override
+        public int compareTo(Object o) {
+
+            DijkstraCompPath o1 = (DijkstraCompPath)o;
+
+            if(this.weight > o1.weight) return 1;
+            if(this.weight < o1.weight) return -1;
+
+            return 0;
+        }
     }
 
 	public Iterator<E> shortestPath(int from, int to) {
 
+        PriorityQueue<DijkstraCompPath> pq = new PriorityQueue<>();
+
+        pq.add(new DijkstraCompPath(from));
 
 
-        Set<Integer> s = new HashSet<>();
+        boolean [] visited = new boolean[nodeMap.size()];
+
+        for (boolean b: visited){
+            b = false;
+        }
+
+        while(!pq.isEmpty()){
+
+            DijkstraCompPath d = pq.poll();
+
+            if(!visited[d.node]){
+                if(d.node == to){
+                    return d.path.iterator();
+                }else{
+                    visited[d.node] = true;
+
+                    Iterator<E> iter = nodeMap.get(d.node).iterator();
+
+                    while (iter.hasNext()){
+                        E e = iter.next();
+                        if(! visited[e.to]){
+                            DijkstraCompPath dc = new DijkstraCompPath(e.to, d.path);
+                            dc.addEdge(e);
+                            pq.add(dc);
+                        }
+
+                    }
+                }
+
+            }
+
+    }
+        return null;
+
+        /*Set<Integer> s = new HashSet<>();
         s.add(from);
 
         Set<Integer> sMv = new HashSet<>();
@@ -146,7 +229,7 @@ public class DirectedGraph<E extends Edge> {
                         Set<E> set1 = thePaths.get(v);
                         set1.addAll(set);
                         set1.add(e);
-                        //thePaths.put(v, set1);
+                        thePaths.put(v, set1);
                         d[v] = d[minPos] + e.getWeight();
                         p[v] = minPos;
                     }
@@ -158,6 +241,7 @@ public class DirectedGraph<E extends Edge> {
         }
 
 		return thePaths.get(to).iterator();
+		*/
 
 	}
 
