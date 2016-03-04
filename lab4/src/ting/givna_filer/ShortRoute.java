@@ -295,7 +295,8 @@ public class ShortRoute extends JFrame implements ActionListener {
 			// Read stops and put them in the node-table
 			// in order to give the user a list of possible stops
 			// assume input file is correct
-			indata = new Scanner(new File("stops.noBOM.txt"), "UTF-8");
+			File f1 = new File(ShortRoute.class.getResource("stops.noBOM.txt").getFile());
+			indata = new Scanner(f1, "UTF-8");
 			while (indata.hasNext()) {
 				String hpl = indata.next().trim();
 				int xco = indata.nextInt();
@@ -313,7 +314,8 @@ public class ShortRoute extends JFrame implements ActionListener {
 			indata.close();
 
 			//  Read in the lines and add to the graph
-			indata =  new Scanner(new File("lines.noBOM.txt"), "UTF-8");
+			File f2 = new File(ShortRoute.class.getResource("lines.noBOM.txt").getFile());
+			indata =  new Scanner(f2, "UTF-8");
 			grafen = new DirectedGraph<BusEdge>(noderna.noOfNodes());
 			while ( indata.hasNext() ) {
 				String lineNo = indata.next();

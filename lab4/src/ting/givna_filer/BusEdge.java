@@ -17,7 +17,7 @@ public class BusEdge extends Edge {
 	/**
 	* Construct an edge. Nothing can change once created.
 	*/
-	BusEdge( int from, int to, double weight, String line ) {
+	public BusEdge(int from, int to, double weight, String line) {
 		super(from, to);
 		this.line = line;
 		this.weight = weight;
