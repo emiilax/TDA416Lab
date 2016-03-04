@@ -12,15 +12,12 @@ public class DirectedGraph<E extends Edge> {
 
 	public DirectedGraph(int noOfNodes) {
 
-		//vertexes = noOfNodes;
 		nodeMap = new HashMap<>();
 		pq = new PriorityQueue(noOfNodes, new CompKruskalEdge());
 
 		for(int i = 0; i < noOfNodes; i++){
 			nodeMap.put(i, new HashSet<E>());
 		}
-
-
 
 	}
 
@@ -80,84 +77,6 @@ public class DirectedGraph<E extends Edge> {
 
 		}
 		return null;
-
-        /*Set<Integer> s = new HashSet<>();
-        s.add(from);
-
-        Set<Integer> sMv = new HashSet<>();
-
-        int [] p = new int [nodeMap.size()];
-        double [] d = new double [nodeMap.size()];
-
-        Map<Integer, Set<E>> thePaths = new HashMap<>();
-
-        for(int i = 0; i < nodeMap.size(); i++){
-            if(i != from ){
-                sMv.add(i);
-            }
-            thePaths.put(i, new HashSet<E>());
-        }
-
-
-        for(int v: sMv){
-
-            p[v] = from;
-
-            E e = getEdge(from, v);
-            if(e != null){
-                Set<E> set = new HashSet<>();
-                d[v] = e.getWeight();
-
-                set.add(e);
-                thePaths.put(v, set);
-            }else{
-                d[v] = Double.MAX_VALUE;
-            }
-
-        }
-
-
-        while(!sMv.isEmpty()){
-
-            Double smallest = null;
-            Integer minPos = null;
-            for(int u: sMv){
-
-                if(minPos == null || d[u] < smallest){
-                    smallest = d[u];
-                    minPos = u;
-                }
-            }
-
-            s.add(minPos);
-            sMv.remove(minPos);
-
-            if(minPos == to){
-                return thePaths.get(to).iterator();
-            }
-            for(int v: sMv){
-                E e = getEdge(minPos, v);
-
-                if(e != null){
-
-                    if((d[minPos] + e.getWeight()) < d[v]){
-                        Set<E> set = thePaths.get(minPos);
-                        Set<E> set1 = thePaths.get(v);
-                        set1.addAll(set);
-                        set1.add(e);
-                        thePaths.put(v, set1);
-                        d[v] = d[minPos] + e.getWeight();
-                        p[v] = minPos;
-                    }
-
-                }
-
-            }
-
-        }
-
-		return thePaths.get(to).iterator();
-		*/
 
 	}
 
@@ -254,8 +173,6 @@ public class DirectedGraph<E extends Edge> {
 			// make the to and from node point at the same set
 			cc.put(e.from, mergedSet);
 			cc.put(e.to, mergedSet);
-
-
 
 		}
 
