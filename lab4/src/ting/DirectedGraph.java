@@ -101,30 +101,6 @@ public class DirectedGraph<E extends Edge> {
 		return null;
 	}
 
-	/**
-	 * Checks if there is a cycle in the graph.
-	 * A help method to the MST - function
-	 *
-	 * @param set the set that you want to check if it contains the from and to nodes
-	 * @param from which node the edge goes from
-	 * @param to which node the edge goes to
-	 * @return true if cycle, else false
-	 */
-	private boolean checkCykel(Set<E> set, int from, int to){
-
-		Iterator<E> iter = set.iterator();
-		Set<Integer> conset = new HashSet<Integer>();
-
-		// Adds all nodes to a new set
-		while(iter.hasNext()){
-			E e = iter.next();
-			conset.add(e.from);
-			conset.add(e.to);
-
-		}
-		// Check if the set contains the nodes
-		return conset.contains(from) && conset.contains(to);
-	}
 
 	/**
 	 * Method used to calculate MST. Used in ShortRoute
@@ -190,7 +166,7 @@ public class DirectedGraph<E extends Edge> {
 	private Set<E> merge(Set<E> fromSet, Set<E> toSet, E e){
 
 		// checks if cycle
-		boolean isCycel = checkCykel(fromSet, e.from, e.to);
+		boolean isCycel = (fromSet == toSet);
 
 		// if there is not a cycle, merge and add the new node.
 		// Else the nodes already are in the same list.
