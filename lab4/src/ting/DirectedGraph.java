@@ -6,14 +6,12 @@ import java.util.*;
 
 public class DirectedGraph<E extends Edge> {
 
-	int nbrofedges = 0;
-	PriorityQueue<E> pq;
+//	int nbrofedges = 0;
 	Map<Integer, Set<E>> nodeMap;
 
 	public DirectedGraph(int noOfNodes) {
 
 		nodeMap = new HashMap<>();
-		pq = new PriorityQueue(noOfNodes, new CompKruskalEdge());
 
 		for(int i = 0; i < noOfNodes; i++){
 			nodeMap.put(i, new HashSet<E>());
@@ -33,7 +31,7 @@ public class DirectedGraph<E extends Edge> {
 		nodeMap.put(e.from, set);
 
 		// Adding to priority queue right away
-		pq.add(e);
+//		pq.add(e);
 
 	}
 	
@@ -108,6 +106,13 @@ public class DirectedGraph<E extends Edge> {
 	 * @return an iterator containing the edges that creates the MST
 	 */
 	public Iterator<E> minimumSpanningTree() {
+		PriorityQueue<E> pq = new PriorityQueue<>(nodeMap.size(), new CompKruskalEdge());
+		Iterator<Set <E>> it=nodeMap.values().iterator();
+
+		while(it.hasNext()){
+			Set <E> edgeSet=it.next();
+			pq.addAll(edgeSet);
+		}
 
 		// Creates a new empty graph and fill it with all the nodes
 		Map<Integer,Set<E>> cc = new HashMap<>();
@@ -116,7 +121,7 @@ public class DirectedGraph<E extends Edge> {
 			cc.put(i, new HashSet<E>());
 		}
 
-		while(!pq.isEmpty() && nbrofedges < nodeMap.size() ){
+		while(!pq.isEmpty() && cc.get(0).size() < nodeMap.size() ){
 
 			// get the head-edge from the priority queue
 			E e = pq.poll();
@@ -178,7 +183,7 @@ public class DirectedGraph<E extends Edge> {
 			}
 
 			fromSet.add(e);
-			nbrofedges++;
+//			nbrofedges++;
 		}
 
 		return fromSet;
